@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>SIDUK DKI</title>
+  <meta charset="utf-8"> </meta>
+  <meta name="viewport" content="width=device-width, initial-scale=1"> </meta>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> </link>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">SIDUK DKI</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/">Home</a></li>
+    </ul>
+  </div>
+</nav>
+
+<h1 class="page-header">Update Penduduk</h1>
+
+	<form action="/penduduk/ubah/submit" method="post" th:object="${penduduk}">
+		<div class = "container">
+			<label>NIK</label><input type ="text" name = "nik" readonly="true" th:value ="${penduduk.nik}" class="form-control"/>
+			<label>Nama</label><input type ="text" name = "nama" readonly="true" th:value ="${penduduk.nama}" th:field="*{nama}" class="form-control"/>
+			<label>Tanggal Lahir</label><input type ="text" readonly ="true" name = "tanggal_lahir" th:value ="${penduduk.tanggal_lahir}" th:field="*{tanggal_lahir}" class="form-control"/>
+			<label>Tempat Lahir</label><input type ="text" readonly = "true" name = "tempat_lahir" th:value ="${penduduk.tempat_lahir}" th:field="*{tempat_lahir}" class="form-control"/>
+			<label>Jenis Kelamin</label><input type ="text" readonly ="true" name = "jenis_kelamin" th:value ="${penduduk.jenis_kelamin}" th:field="*{jenis_kelamin}" class="form-control"/>
+			<label>Kewarganegaraan</label><input type ="text" name = "is_wni" th:value ="${penduduk.is_wni}" th:field="*{is_wni}" class="form-control"/>
+			<label>Id Keluarga</label><input type ="text" readonly ="true" name = "id_keluarga" th:value ="${penduduk.id_keluarga}" th:field="*{id_keluarga}" class="form-control"/>
+			<label>Agama</label><input type ="text" name = "agama" th:value ="${penduduk.agama}" th:field="*{agama}" class="form-control"/>
+			<label>Pekerjaan</label><input type ="text" name = "pekerjaan" th:value ="${penduduk.pekerjaan}" th:field="*{pekerjaan}" class="form-control"/>
+			<label>Status Perkawinan</label><input type ="text" name = "status_perkawinan" th:value ="${penduduk.status_perkawinan}" th:field="*{status_perkawinan}" class="form-control"/>
+			<label>Status Dalam Keluarga</label><input type ="text" name = "status_dalam_keluarga" th:value ="${penduduk.status_dalam_keluarga}" th:field="*{status_dalam_keluarga}" class="form-control"/>
+			<label>Golongan Darah</label><input type ="text" readonly = "true" name = "golongan_darah" th:value ="${penduduk.golongan_darah}" th:field="*{golongan_darah}" class="form-control"/>
+			<label>Status Kematian</label><input type ="text" name = "is_wafat" th:value ="${penduduk.is_wafat}" th:field="*{is_wafat}" class="form-control"/>
+			
+			
+			<button type="submit" class="btn btn-primary">Ubah</button>
+		</div>
+	</form>
+
+</body>
+</html>

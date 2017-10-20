@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>SIDUK DKI</title>
+  <meta charset="utf-8"> </meta>
+  <meta name="viewport" content="width=device-width, initial-scale=1"> </meta>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> </link>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">SIDUK DKI</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/">Home</a></li>
+    </ul>
+  </div>
+</nav>
+
+<h1 class="page-header">Update Keluarga</h1>
+
+	<form action="/keluarga/ubah/submit" method="post" th:object="${keluarga}">
+		<div class = "container">
+			<label>NKK</label><input type ="text" name = "nomor_kk" readonly="true" th:value ="${keluarga.nomor_kk}" class="form-control"/>
+			<label>Alamat</label><input type ="text" name = "alamat"  th:value ="${keluarga.alamat}" th:field="*{alamat}" class="form-control"/>
+			<label>RT</label><input type ="text" name = "rt" th:value ="${keluarga.rt}" th:field="*{rt}" class="form-control"/>
+			<label>RW</label><input type ="text" name = "rw" th:value ="${keluarga.rw}" th:field="*{rw}" class="form-control"/>
+			<label>Id Kelurahan</label><input type ="text" name = "id_kelurahan" th:value ="${keluarga.id_kelurahan}" th:field="*{id_kelurahan}" class="form-control"/>
+			<label>Berlaku</label><input type ="text" readonly = "true" name = "is_tidak_berlaku" th:value ="${keluarga.is_tidak_berlaku}" th:field="*{is_tidak_berlaku}" class="form-control"/>
+			
+			
+			<button type="submit" class="btn btn-primary">Ubah</button>
+		</div>
+	</form>
+
+</body>
+</html>
