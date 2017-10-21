@@ -34,9 +34,12 @@ public interface KeluargaMapper {
 	@Select("select id_kelurahan from keluarga where id = #{id_keluarga}")
 	int selectIdKelurahan(int id_keluarga);
 	
-	@Update("update keluarga set alamat = #{alamat} , rt = #{rt} , rw = #{rw},"
-			+ "id_kelurahan = #{id_kelurahan}")
+	@Update("update keluarga set nomor_kk = #{nomor_kk} , alamat = #{alamat} , rt = #{rt} , rw = #{rw},"
+			+ "id_kelurahan = #{id_kelurahan} where id = #{id}")
 	void updateKeluarga(KeluargaModel keluarga);
 	
-	//@Select("select id_kelurahan from keluarga where nomor_kk = #{nomor_kk}")
+	@Select("select id_kelurahan from keluarga where nomor_kk = #{nomor_kk}")
+	int selectIdKel(String nomor_kk);
+	
+	
 }

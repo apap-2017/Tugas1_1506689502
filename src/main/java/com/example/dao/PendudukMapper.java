@@ -37,8 +37,11 @@ public interface PendudukMapper {
 			   + "#{is_wni}, #{is_wafat},#{id_keluarga},#{status_dalam_keluarga})")
 	void addPenduduk(PendudukModel penduduk);
 	
-	@Update("update penduduk set is_wni = #{is_wni}, agama = #{agama} , pekerjaan = #{pekerjaan} , status_perkawinan = #{status_perkawinan} ,"
-			+ "status_dalam_keluarga = #{status_dalam_keluarga} , is_wafat = #{is_wafat} where nik = #{nik}")
+	@Update("update penduduk set nik = #{nik}, is_wni = #{is_wni}, agama = #{agama} , pekerjaan = #{pekerjaan} , status_perkawinan = #{status_perkawinan} ,"
+			+ "status_dalam_keluarga = #{status_dalam_keluarga} , is_wafat = #{is_wafat} , id_keluarga = #{id_keluarga} where id = #{id}")
 	void UpdatePenduduk(PendudukModel penduduk);
+	
+	@Select("select id_keluarga from penduduk where nik = #{nik}")
+	int selectKeluargaId(String nik);
 	
 }

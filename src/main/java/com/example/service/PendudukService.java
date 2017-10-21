@@ -13,4 +13,6 @@ public interface PendudukService {
 	
 	void updatePenduduk(PendudukModel penduduk);
 	
+	int selectKeluargaId(String nik);
+	
 }

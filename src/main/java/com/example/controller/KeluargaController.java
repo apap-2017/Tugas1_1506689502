@@ -163,29 +163,48 @@ public class KeluargaController {
 	public String updateSubmit(@ModelAttribute KeluargaModel keluarga,Model model,@RequestParam ( value ="id_kelurahan") int id_kelurahan,
 		@RequestParam(value = "nomor_kk") String nomor_kk) {
 		
-		String sub_nkk = nomor_kk.substring(6,11);
-		String sub2_nkk = nomor_kk.substring(12,16);
-		String sub3_nkk = nomor_kk.substring(0,5); 
-		
-		model.addAttribute("nomor_kk" , nomor_kk);
-		
 		//dapetin idkel dari db
-		KeluargaModel keluargaKelId = keluargaDAO.selectKeluargaKK(nomor_kk);
-		int idKel = keluargaKelId.getId_kelurahan();
-		System.out.println(idKel);
+		int idKel = keluargaDAO.selectIdKel(nomor_kk);
 		
 		//dapetin kode kec berdasarkan id kel yang di input
-		String kode = lokasiDAO.kodeKecamatan(id_kelurahan);
+		String kode = lokasiDAO.selectKecKode(id_kelurahan);
 		String kode_kec = kode.substring(0,6);
+		
+		// 6 digit tanggal daftra
+			String x = LocalDate.now().toString();
+			String tahun = x.substring(2,4);
+			String bulan = x.substring(5,7);
+			String hari = x.substring(8,10);
+			String tanggalSekarang = hari+bulan+tahun;
+			
+			String nkk_blmjadi = kode_kec + tanggalSekarang;
+			
+			int i = 1;
+		    String cekSama = "000" + 1;
+		    KeluargaModel cek_sama = keluargaDAO.selectKeluargaKK(nkk_blmjadi + cekSama);
+		    while (cek_sama != null) {
+		    	i++;
+		    	if(i <= 9) {
+		    		cekSama = "000" + i;
+		    	}
+		    	else if(i > 9 && i <= 99) {
+		    		cekSama = "00" + i;
+		    	}
+		    	else {
+		    		cekSama = "0" + i;
+		    	}
+		    	cek_sama = keluargaDAO.selectKeluargaKK(nkk_blmjadi+cekSama);
+		    }
 		
 		//kalau id kel yang di db ga sama sama yang di input (berarti di ubah)
 		if(idKel != id_kelurahan) {
 			//ada nomor_nkk baru,karena ada kemungkinan kode kec nya brubah
-			nomor_kk = kode_kec + sub_nkk + sub2_nkk;
+			nomor_kk = kode_kec + tanggalSekarang + cekSama;
 		}
 		
 		keluarga.setNomor_kk(nomor_kk);
-		
+		keluarga.setId_kelurahan(id_kelurahan);
+		model.addAttribute("nomor_kk" , nomor_kk);
 		keluargaDAO.updateKeluarga(keluarga);
 		
 		return "sukses-update-keluarga";

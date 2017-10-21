@@ -15,4 +15,7 @@ public interface KeluargaService {
 	int selectIdKelurahan(int id_keluarga);
 	
 	void updateKeluarga(KeluargaModel keluarga);
+	
+	int selectIdKel(String nomor_kk);
+	
 }

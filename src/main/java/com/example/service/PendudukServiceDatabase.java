@@ -43,6 +43,12 @@ public class PendudukServiceDatabase implements PendudukService {
 		
 	}
 
+	@Override
+	public int selectKeluargaId(String nik) {
+		log.info("nik" , nik);
+		return pendudukMapper.selectKeluargaId(nik);
+	}
+
 		
 	
 }

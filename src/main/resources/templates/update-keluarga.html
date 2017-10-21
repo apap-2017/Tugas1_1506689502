@@ -25,6 +25,7 @@
 
 	<form action="/keluarga/ubah/submit" method="post" th:object="${keluarga}">
 		<div class = "container">
+			<label>ID</label><input type ="text" name = "id" readonly="true" th:value ="${keluarga.id}" class="form-control"/>
 			<label>NKK</label><input type ="text" name = "nomor_kk" readonly="true" th:value ="${keluarga.nomor_kk}" class="form-control"/>
 			<label>Alamat</label><input type ="text" name = "alamat"  th:value ="${keluarga.alamat}" th:field="*{alamat}" class="form-control"/>
 			<label>RT</label><input type ="text" name = "rt" th:value ="${keluarga.rt}" th:field="*{rt}" class="form-control"/>

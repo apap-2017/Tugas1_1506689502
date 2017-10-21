@@ -49,6 +49,12 @@ public class KeluargaServiceDatabase implements KeluargaService{
 		
 	}
 
+	@Override
+	public int selectIdKel(String nomor_kk) {
+		log.info("nomor_kk" , nomor_kk);
+		return keluargaMapper.selectIdKel(nomor_kk);
+	}
+
 	
 	
 

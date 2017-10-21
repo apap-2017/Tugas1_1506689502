@@ -162,7 +162,63 @@ public class PendudukController {
 	}
 	
 	@RequestMapping(value ="/penduduk/ubah/submit", method = RequestMethod.POST)
-    public String updateSubmit (@ModelAttribute PendudukModel penduduk, Model model, @RequestParam(value = "nik") String nik) {
+    public String updateSubmit (@ModelAttribute PendudukModel penduduk, Model model, 
+    		@RequestParam(value = "nik") String nik,
+    		@RequestParam(value="id_keluarga") int id_keluarga,
+    		@RequestParam(value ="tanggal_lahir") String tanggal_lahir,
+    		@RequestParam(value = "jenis_kelamin") String jenis_kelamin) {
+		
+		//ngambil id keluarga dari db
+		int kel_id = pendudukDAO.selectKeluargaId(nik);
+		
+		//ngambil id kelurahan dari id keluarga
+		int id_kel = keluargaDAO.selectIdKelurahan(kel_id);
+		
+		//ambil kode kecamatan berdasarkan id kelurahan yang di input
+		String kode = lokasiDAO.selectKecKode(id_kel);
+		String kode_kecamatan = kode.substring(0,6);
+		
+		//tanggal lahir
+		String tanggal = tanggal_lahir.substring(8,10);
+		if(jenis_kelamin.equalsIgnoreCase("P")) {
+			int tgl_lahir = Integer.parseInt(tanggal) + 40;
+			tanggal = String.valueOf(tgl_lahir);
+		}
+		String lahir = tanggal_lahir.substring(2,4);
+		String tgl = tanggal_lahir.substring(5,7);
+		String tglLahir = tanggal + tgl + lahir;
+		
+		String nik_blmjadi = kode_kecamatan + tglLahir;
+		
+		//cek sama dengan db
+		int i = 1;
+		String cekSama = "000" + 1;
+		PendudukModel cek_sama = pendudukDAO.selectPenduduk(nik_blmjadi + cekSama);
+		while (cek_sama != null) {
+	    	i++;
+	    	if(i <= 9) {
+	    		cekSama = "000" + i;
+	    	}
+	    	else if(i > 9 && i <= 99) {
+	    		cekSama = "00" + i;
+	    	}
+	    	else {
+	    		cekSama = "0" + i;
+	    	}
+	    	cek_sama = pendudukDAO.selectPenduduk(nik_blmjadi+cekSama);
+	    }
+		
+		//kalau id keluraga di input ga sama sama id keluarga yang di db
+		if(kel_id != id_keluarga) {
+			// nik nya berubah
+			nik = nik_blmjadi + cekSama;
+		}
+		
+		penduduk.setNik(nik);
+		penduduk.setId_keluarga(id_keluarga);
+		penduduk.setJenis_kelamin(jenis_kelamin);
+		penduduk.setTanggal_lahir(tanggal_lahir);
+		
         pendudukDAO.updatePenduduk(penduduk);
 		model.addAttribute("nik" , nik);
         return "sukses-update-penduduk";
