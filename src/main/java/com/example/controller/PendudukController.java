@@ -243,9 +243,9 @@ public class PendudukController {
 		List<PendudukModel> isWafat_keluarga = pendudukDAO.selectIsWafat(nik);
 		
 		for(int i = 0; i < isWafat_keluarga.size(); i++) {
-			System.out.println("masuk ga ya");
+			//System.out.println("masuk ga ya");
 			if(isWafat_keluarga.get(i).getIs_wafat().equals("1")) {
-				System.out.println("masuk sini ga ya");
+				//System.out.println("masuk sini ga ya");
 				keluarga.setIs_tidak_berlaku(1);
 				keluargaDAO.updateKeluarga(keluarga);
 			}
@@ -254,18 +254,18 @@ public class PendudukController {
 		return "sukses-update-mati";
 	}
 	
-//	@RequestMapping(value ="/penduduk/cari")
-//	public String cari_penduduk(Model model, 
-//			@RequestParam(value = "nama_kota", required=false) String nama_kota,
-//			@RequestParam(value = "nama_kecamatan", required=false) String nama_kecamatan){
-//		//System.out.println(kota);
-//		
-//	
-//			List<KotaModel> kotas = pendudukDAO.selectKota();
-//			model.addAttribute("kotas" , kotas);
-//			
-//			return "penduduk-cari-kota";
-//		
-//		
-//	}
+	@RequestMapping(value ="/penduduk/cari")
+	public String cari_penduduk(Model model, 
+			@RequestParam(value = "nama_kota", required=false) String nama_kota,
+			@RequestParam(value = "nama_kecamatan", required=false) String nama_kecamatan){
+		//System.out.println(kota);
+		
+	
+			List<KotaModel> kotas = pendudukDAO.selectKota();
+			model.addAttribute("kotas" , kotas);
+			
+			return "penduduk-cari-kota";
+		
+		
+	}
 }
