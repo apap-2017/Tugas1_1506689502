@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,9 @@ import com.example.model.PendudukModel;
 import com.example.service.KeluargaService;
 import com.example.service.LokasiService;
 import com.example.service.PendudukService;
+import com.example.model.KotaModel;
+import com.example.model.KecamatanModel;
+import com.example.model.KelurahanModel;
 
 
 @Controller
@@ -117,9 +122,9 @@ public class PendudukController {
 		}
 		
 		//is wafat
-		is_wafat = "1";
+		is_wafat = "0";
 		if(is_wafat.equalsIgnoreCase("hidup")) {
-			is_wafat = "0";
+			is_wafat = "1";
 		}
 		
 		//jenis kelamin
@@ -223,4 +228,44 @@ public class PendudukController {
 		model.addAttribute("nik" , nik);
         return "sukses-update-penduduk";
     }
+	
+	@RequestMapping(value ="/penduduk/mati" , method = RequestMethod.POST)
+	public String mati(@ModelAttribute("penduduk") PendudukModel penduduk,
+			@ModelAttribute("keluarga") KeluargaModel keluarga,
+			Model model) {
+		
+		penduduk.setIs_wafat("1");
+		pendudukDAO.updatePenduduk(penduduk);
+		String nik = penduduk.getNik();
+		//System.out.println(nik);
+		model.addAttribute("nik" , nik);
+		
+		List<PendudukModel> isWafat_keluarga = pendudukDAO.selectIsWafat(nik);
+		
+		for(int i = 0; i < isWafat_keluarga.size(); i++) {
+			System.out.println("masuk ga ya");
+			if(isWafat_keluarga.get(i).getIs_wafat().equals("1")) {
+				System.out.println("masuk sini ga ya");
+				keluarga.setIs_tidak_berlaku(1);
+				keluargaDAO.updateKeluarga(keluarga);
+			}
+		}
+		
+		return "sukses-update-mati";
+	}
+	
+//	@RequestMapping(value ="/penduduk/cari")
+//	public String cari_penduduk(Model model, 
+//			@RequestParam(value = "nama_kota", required=false) String nama_kota,
+//			@RequestParam(value = "nama_kecamatan", required=false) String nama_kecamatan){
+//		//System.out.println(kota);
+//		
+//	
+//			List<KotaModel> kotas = pendudukDAO.selectKota();
+//			model.addAttribute("kotas" , kotas);
+//			
+//			return "penduduk-cari-kota";
+//		
+//		
+//	}
 }

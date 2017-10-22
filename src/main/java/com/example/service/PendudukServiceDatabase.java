@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.dao.PendudukMapper;
+import com.example.model.KecamatanModel;
+import com.example.model.KelurahanModel;
+import com.example.model.KotaModel;
 import com.example.model.PendudukModel;
 
 import lombok.extern.slf4j.Slf4j;
@@ -48,6 +51,33 @@ public class PendudukServiceDatabase implements PendudukService {
 		log.info("nik" , nik);
 		return pendudukMapper.selectKeluargaId(nik);
 	}
+
+	@Override
+	public List<KotaModel> selectKota() {
+		// TODO Auto-generated method stub
+		return pendudukMapper.selectKota();
+	}
+
+	@Override
+	public List<PendudukModel> selectIsWafat(String nik) {
+		// TODO Auto-generated method stub
+		return pendudukMapper.selectIsWafat(nik);
+	}
+
+	@Override
+	public List<KecamatanModel> selectKecamatan(String nama_kota) {
+		// TODO Auto-generated method stub
+		return pendudukMapper.selectKecamatan(nama_kota);
+	}
+
+	@Override
+	public List<KelurahanModel> selectKelurahan(int id_kecamatan) {
+		// TODO Auto-generated method stub
+		return pendudukMapper.selectKelurahan(id_kecamatan);
+	}
+
+	
+	
 
 		
 	

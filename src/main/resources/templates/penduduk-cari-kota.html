@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>SIDUK DKI</title>
+  <meta charset="utf-8"> </meta>
+  <meta name="viewport" content="width=device-width, initial-scale=1"> </meta>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> </link>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">SIDUK DKI</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/">Home</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+	<h2>Lihat Data Penduduk Berdasarkan Kota</h2>
+	 <div class="container-fluid"> 
+        <form method="get" action="/penduduk/cari"> 
+
+            <div class="form-group"> 
+                <label for="nama_kota"><h4>Kota/Kabupaten</h4></label> 
+                <select class="form-control" name="id_kota" id="id_kota" required="true" > 
+                    <div  th:each="kota,iterationStatus: ${kotas}" > 
+                        <option th:value="${kota.id}" th:text="${kota.nama_kota}">Kota yang mau dipilih</option> 
+                    </div> 
+                </select> 
+            </div> 
+
+            <br/> 
+            <button type="submit" class="btn btn-default">Lihat</button> 
+        </form>
+       </div>
+ </div>
+</body>
+</html>

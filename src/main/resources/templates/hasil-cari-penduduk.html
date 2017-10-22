@@ -75,6 +75,20 @@
         <div class="col-sm-6"><h4 th:text="'Status Kematian'"></h4></div>
 		<h4 th:text="${penduduk.is_wafat} == true? ': Wafat': ':Hidup'"></h4>
 		</div>
+		
+		<form action="/penduduk/mati" method = "post">
+			<input type = "hidden" name="id" th:value="${penduduk.id}" /> 
+  			<input type="hidden" name="nik" th:value= "${penduduk.nik}"></input> 
+  			<input type="hidden" name="is_wni" th:value= "${penduduk.is_wni}"></input> 
+  			<input type="hidden" name="id_keluarga" th:value= "${penduduk.id_keluarga}"></input> 
+  			<input type="hidden" name="agama" th:value= "${penduduk.agama}"></input> 
+  			<input type="hidden" name="pekerjaan" th:value= "${penduduk.pekerjaan}"></input> 
+  			<input type="hidden" name="status_perkawinan" th:value= "${penduduk.status_perkawinan}"></input> 
+  			<input type="hidden" name="status_dalam_keluarga" th:value= "${penduduk.status_dalam_keluarga}"></input> 
+  			<input type="hidden" name="is_wafat" th:value= "${penduduk.is_wafat}"></input>
+			<button type="submit" class="btn btn-primary" >Nonaktifkan</button>
+		</form>
+		
       </div>
     </div>
 </div>

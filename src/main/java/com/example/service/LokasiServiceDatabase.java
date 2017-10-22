@@ -1,6 +1,10 @@
 package com.example.service;
 
+import com.example.model.KotaModel;
 import com.example.model.LokasiModel;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +50,8 @@ public class LokasiServiceDatabase implements LokasiService{
 		log.info("id_kelurahan" + id_kelurahan);
 		return lokasiMapper.kodeKecamatan(id_kelurahan);
 	}
+
+	
 
 
 	

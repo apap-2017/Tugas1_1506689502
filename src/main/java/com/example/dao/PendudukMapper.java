@@ -11,6 +11,9 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.example.model.KeluargaModel;
+import com.example.model.KotaModel;
+import com.example.model.KecamatanModel;
+import com.example.model.KelurahanModel;
 import com.example.model.PendudukModel;
 
 import java.util.List;
@@ -43,5 +46,17 @@ public interface PendudukMapper {
 	
 	@Select("select id_keluarga from penduduk where nik = #{nik}")
 	int selectKeluargaId(String nik);
+	
+	@Select("select * from kota")
+	List<KotaModel> selectKota();
+	
+	@Select("select * from kecamatan k,kota kt where id_kota = kt.id and kt.nama_kota = #{nama_kota}")
+	List<KecamatanModel> selectKecamatan(String nama_kota);
+	
+	@Select("select * from kelurahan where id = #{id_kecamatan}")
+	List<KelurahanModel> selectKelurahan(int id_kecamatan);
+	
+	@Select("select is_wafat from keluarga k,penduduk p where k.id = p.id_keluarga and nik = #{nik}")
+	List<PendudukModel> selectIsWafat(@Param("nik") String nik);
 	
 }

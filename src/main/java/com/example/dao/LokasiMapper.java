@@ -9,8 +9,10 @@ import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import java.util.List;
 
 import com.example.model.LokasiModel;
+import com.example.model.KotaModel;
 
 @Mapper
 public interface LokasiMapper {
@@ -32,4 +34,7 @@ public interface LokasiMapper {
 	@Select("select id_kelurahan from kecamatan kec,kelurahan kel,keluarga k "
 			+ "where kel.id = #{id_kelurahan} and kel.id = k.id_kelurahan and kec.id = kel.id_kecamatan")
 	String kodeKecamatan(int id_kelurahan);
+	
+
+	
 }

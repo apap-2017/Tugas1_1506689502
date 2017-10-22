@@ -37,6 +37,7 @@ public class KeluargaController {
 	{
 		
 		KeluargaModel keluarga = keluargaDAO.selectKeluargaKK(nomor_kk);
+		String nkk = keluarga.getNomor_kk();
 		LokasiModel lokasi = lokasiDAO.selectLokasi(keluarga.getId_kelurahan());
 		List<PendudukModel> penduduks = pendudukDAO.pilihKeluarga(keluarga.getId());
 		
@@ -160,8 +161,9 @@ public class KeluargaController {
 	}
 	
 	@RequestMapping(value = "/keluarga/ubah/submit", method = RequestMethod.POST)
-	public String updateSubmit(@ModelAttribute KeluargaModel keluarga,Model model,@RequestParam ( value ="id_kelurahan") int id_kelurahan,
-		@RequestParam(value = "nomor_kk") String nomor_kk) {
+	public String updateSubmit(@ModelAttribute KeluargaModel keluarga,Model model,
+			@RequestParam ( value ="id_kelurahan") int id_kelurahan,
+			@RequestParam(value = "nomor_kk") String nomor_kk) {
 		
 		//dapetin idkel dari db
 		int idKel = keluargaDAO.selectIdKel(nomor_kk);
